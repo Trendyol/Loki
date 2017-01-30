@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Loki</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>Loki</title>
     <authors>Gökhan Gökalp</authors>
     <owners>Gökhan Gökalp</owners>
@@ -11,8 +11,7 @@
     <summary>Loki provides an easy way to handle locking scenarios on distributed systems.</summary>
     <tags>Distributed lock</tags>
     <dependencies>
-      <dependency id="RedLock.net" version="1.7.4" />
-      <dependency id="StackExchange.Redis" version="1.1.608" />
+      <dependency id="StackExchange.Redis" version="1.2.0" />
     </dependencies>
   </metadata>
   <files>

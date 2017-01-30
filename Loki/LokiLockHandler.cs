@@ -9,7 +9,7 @@
             SecondaryLockHandler = lockHandler;
         }
 
-        public abstract bool Lock(string tenantType, int expiryFromSeconds);
-        public abstract void Release(string tenantType);
+        public abstract bool Lock(string serviceKey, int expiryFromSeconds);
+        public abstract void Release(string serviceKey);
     }
 }
