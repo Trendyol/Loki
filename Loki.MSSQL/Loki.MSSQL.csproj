@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0483E6C7-3D76-41A3-BE26-AA951BFB0400}</ProjectGuid>
+    <ProjectGuid>{8F4D5AF6-2740-4246-A03C-660983AEC2A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Loki</RootNamespace>
-    <AssemblyName>Loki</AssemblyName>
+    <RootNamespace>Loki.MSSQL</RootNamespace>
+    <AssemblyName>Loki.MSSQL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,14 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StackExchange.Redis, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.1.2.0\lib\net46\StackExchange.Redis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,20 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LokiConfiguration.cs" />
-    <Compile Include="LokiConfigurationBuilder.cs" />
-    <Compile Include="LokiLockHandler.cs" />
-    <Compile Include="Locking.cs" />
-    <Compile Include="LokiLockManager.cs" />
+    <Compile Include="MSSQLHelper.cs" />
+    <Compile Include="MSSQLLokiLockHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Redis\IRedisStore.cs" />
-    <Compile Include="Redis\RedisConnectionFactory.cs" />
-    <Compile Include="Redis\RedisLokiLockHandler.cs" />
-    <Compile Include="Redis\RedisStore.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Loki.nuspec" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Loki\Loki.csproj">
+      <Project>{0483E6C7-3D76-41A3-BE26-AA951BFB0400}</Project>
+      <Name>Loki</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

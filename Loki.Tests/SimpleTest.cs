@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Loki.MSSQL;
+using Loki.Redis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ploeh.AutoFixture;
 
@@ -26,11 +29,14 @@ namespace Loki.Tests
 
             List<EndPoint> redisEndPoints = new List<EndPoint>
             {
-                new DnsEndPoint("192.168.99.100", 6379)
+                new DnsEndPoint("your redis endpoint", 6379)
             };
+
+            string connectionString = ConfigurationManager.ConnectionStrings["TestDb"].ConnectionString;
 
             LokiConfigurationBuilder.Instance.SetTenantType("SimpleTestClient")
                                     .SetPrimaryLockHandler(new RedisLokiLockHandler(redisEndPoints.ToArray()))
+                                    .SetSecondaryLockHandler(new MSSQLLokiLockHandler(connectionString))
                                     .Build();
         }
 
