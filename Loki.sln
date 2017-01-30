@@ -17,7 +17,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{D647096A-1FA5-470F-8226-5076F0E3C9F1}"
 	ProjectSection(SolutionItems) = preProject
 		misc\logo.png = misc\logo.png
-		..\..\..\Desktop\loki-basic-workflow.png = ..\..\..\Desktop\loki-basic-workflow.png
+		misc\loki-basic-workflow.png = misc\loki-basic-workflow.png
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loki.MSSQL", "Loki.MSSQL\Loki.MSSQL.csproj", "{8F4D5AF6-2740-4246-A03C-660983AEC2A2}"
