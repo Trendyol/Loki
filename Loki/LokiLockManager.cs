@@ -9,7 +9,7 @@
         {
             lock (_lock)
             {
-                return _lokiLockHandler.Lock(LokiConfiguration.TenantType, expiryFromSeconds);
+                return _lokiLockHandler.Lock(LokiConfiguration.ServiceKey, expiryFromSeconds);
             }
         }
 
@@ -17,7 +17,7 @@
         {
             lock (_lock)
             {
-                _lokiLockHandler.Release(LokiConfiguration.TenantType);
+                _lokiLockHandler.Release(LokiConfiguration.ServiceKey);
             }
         }
     }

@@ -34,7 +34,7 @@ namespace Loki.Tests
 
             string connectionString = ConfigurationManager.ConnectionStrings["TestDb"].ConnectionString;
 
-            LokiConfigurationBuilder.Instance.SetTenantType("SimpleTestClient")
+            LokiConfigurationBuilder.Instance.SetServiceKey("SimpleTestClient")
                                     .SetPrimaryLockHandler(new RedisLokiLockHandler(redisEndPoints.ToArray()))
                                     .SetSecondaryLockHandler(new MSSQLLokiLockHandler(connectionString))
                                     .Build();

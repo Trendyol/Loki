@@ -13,22 +13,22 @@ namespace Loki.Redis
             _redisStore = RedisStore.Instance.Initialize(redisEndPoints);
         }
 
-        public override bool Lock(string tenantType, int expiryFromSeconds)
+        public override bool Lock(string serviceKey, int expiryFromSeconds)
         {
             bool isLocked = false;
 
             try
             {
-                string isAnyLocked = _redisStore.Get(tenantType);
+                string isAnyLocked = _redisStore.Get(serviceKey);
 
                 if (String.IsNullOrEmpty(isAnyLocked))
                 {
-                    isLocked = _redisStore.Set(tenantType, "locked", expiryFromSeconds);
+                    isLocked = _redisStore.Set(serviceKey, "locked", expiryFromSeconds);
 
                     // When occurs any network problem within Redis, it could be provided consistent locking with secondary handler.
                     if (SecondaryLockHandler != null)
                     {
-                        Task.Factory.StartNew(() => SecondaryLockHandler.Lock(tenantType, expiryFromSeconds));
+                        Task.Factory.StartNew(() => SecondaryLockHandler.Lock(serviceKey, expiryFromSeconds));
                     }
                 }
             }
@@ -36,27 +36,27 @@ namespace Loki.Redis
             {
                 if (SecondaryLockHandler != null)
                 {
-                    isLocked = SecondaryLockHandler.Lock(tenantType, expiryFromSeconds);
+                    isLocked = SecondaryLockHandler.Lock(serviceKey, expiryFromSeconds);
                 }
             }
 
             return isLocked;
         }
 
-        public override void Release(string tenantType)
+        public override void Release(string serviceKey)
         {
             try
             {
-                _redisStore.Delete(tenantType);
+                _redisStore.Delete(serviceKey);
 
                 if (SecondaryLockHandler != null)
                 {
-                    Task.Factory.StartNew(() => SecondaryLockHandler.Release(tenantType));
+                    Task.Factory.StartNew(() => SecondaryLockHandler.Release(serviceKey));
                 }
             }
             catch (Exception ex)
             {
-                SecondaryLockHandler?.Release(tenantType);
+                SecondaryLockHandler?.Release(serviceKey);
             }
         }
     }

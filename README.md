@@ -1,7 +1,7 @@
 #   **Loki**
 ------------------------------
 
-![alt tag](https://raw.githubusercontent.com/GokGokalp/Loki/master/misc/logo.png)  
+![alt tag](https://raw.githubusercontent.com/GokGokalp/Loki/master/misc/logo.png)
 
 Loki provides an easy way to handle locking scenarios on distributed systems.
 
@@ -10,6 +10,9 @@ Loki provides an easy way to handle locking scenarios on distributed systems.
 - Support **MSSQL** locking handler for secondary
 - Multiple locking handlers can be added such as **MongoDB** etc
 - Secondary locking handler can be set for against connection failure problems
+
+####Basic Loki Workflow:
+![alt tag](https://raw.githubusercontent.com/GokGokalp/Loki/master/misc/loki-basic-workflow.png)
 
 ####Usage:
 Firstly you have to easily initialize the Loki with **LokiConfigurationBuilder**.
@@ -20,7 +23,7 @@ List<EndPoint> redisEndPoints = new List<EndPoint>
 	new DnsEndPoint("redisUri", redisPort)
 };
 
-LokiConfigurationBuilder.Instance.SetTenantType("SimpleTestClient")
+LokiConfigurationBuilder.Instance.SetServiceKey("SimpleTestClient")
 						.SetPrimaryLockHandler(new RedisLokiLockHandler(redisEndPoints.ToArray()))
 						.Build();
 ```
@@ -39,34 +42,34 @@ Also you can easily implement custom locking handlers.
 ```csharp
 public class FooLockHandler : LokiLockHandler
 {
-    public override bool Lock(string tenantType, int expiryFromSeconds)
+    public override bool Lock(string serviceKey, int expiryFromSeconds)
     {
         //Lock operations
     }
 
-    public override void Release(string tenantType)
+    public override void Release(string serviceKey)
     {
         //Release operations
     }
 }
 ```
 
-If you want to use MSSQL locking handler for secondary, you need to create LokiLockings table as below:
+If you want to use MSSQL locking handler for secondary, firstly you need to create LokiLockings table as below:
 
 ```sql
 CREATE TABLE [dbo].[LokiLockings](
-	[TenantType] [varchar](50) NOT NULL,
+	[ServiceKey] [varchar](50) NOT NULL,
 	[CreationDate] [datetime] NOT NULL,
  CONSTRAINT [PK_LokiLockings] PRIMARY KEY CLUSTERED 
 (
-	[TenantType] ASC
+	[ServiceKey] ASC
 ))
 ```
 
-then:
+then just:
 
 ```csharp
-LokiConfigurationBuilder.Instance.SetTenantType("SimpleTestClient")
+LokiConfigurationBuilder.Instance.SetServiceKey("SimpleTestClient")
 						.SetPrimaryLockHandler(new RedisLokiLockHandler(redisEndPoints.ToArray()))
 						.SetSecondaryLockHandler(new MSSQLLokiLockHandler("connectionString"))
 						.Build();

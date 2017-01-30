@@ -27,9 +27,9 @@ namespace Loki
             return this;
         }
 
-        public LokiConfigurationBuilder SetTenantType(string tenantType)
+        public LokiConfigurationBuilder SetServiceKey(string serviceKey)
         {
-            LokiConfiguration.TenantType = tenantType;
+            LokiConfiguration.ServiceKey = serviceKey;
 
             return this;
         }
