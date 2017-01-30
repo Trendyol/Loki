@@ -19,7 +19,7 @@ namespace Loki.Tests
 
                     Source.ProcessedItems.Add(item);
                 }
-            }, expiryFromSeconds: 1);
+            }, expiryFromSeconds: 5);
         }
     }
 }
