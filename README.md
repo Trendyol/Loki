@@ -17,10 +17,8 @@ Loki provides an easy way to handle locking scenarios on distributed systems.
 
 ### NuGet Packages
 
-```
-
-Install-Package LokiNet
-
+``` 
+Install-Package LokiNet 
 ```
 
 
