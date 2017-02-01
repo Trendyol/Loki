@@ -14,6 +14,16 @@ Loki provides an easy way to handle locking scenarios on distributed systems.
 ####Basic Loki Workflow:
 ![alt tag](https://raw.githubusercontent.com/GokGokalp/Loki/master/misc/loki-basic-workflow.png)
 
+
+### NuGet Packages
+
+```
+
+Install-Package LokiNet
+
+```
+
+
 ####Usage:
 Firstly you have to easily initialize the Loki with **LokiConfigurationBuilder**.
 
