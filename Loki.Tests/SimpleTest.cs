@@ -78,5 +78,44 @@ namespace Loki.Tests
 
             Assert.AreEqual(0, dublicateItems.Count);
         }
+
+        [TestMethod]
+        public void TestClientLocking_WithUniqueKey_WhenUseSharedResource_ShouldHaveNotUseSameItem()
+        {
+            // Arrange
+            List<Task> clientTasks = new List<Task>
+            {
+                new Task(() =>
+                {
+                    for (int i = 0; i < Source.DummyItems.Count; i++)
+                    {
+                        _testClient.DebugWriteLineWithUniqueKey();
+                    }
+                }),
+
+                new Task(() =>
+                {
+                    for (int i = 0; i < Source.DummyItems.Count; i++)
+                    {
+                        _testClient2.DebugWriteLineWithUniqueKey();
+                    }
+                })
+            };
+
+
+
+            //Act
+            clientTasks.ForEach(x => x.Start());
+
+            Task.WaitAll(clientTasks.ToArray());
+
+            //Assert
+            var dublicateItems = Source.ProcessedItems
+                                .GroupBy(i => i)
+                                .Where(g => g.Count() > 1)
+                                .Select(g => g.Key).ToList();
+
+            Assert.AreEqual(0, dublicateItems.Count);
+        }
     }
 }

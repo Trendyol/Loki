@@ -13,14 +13,14 @@ namespace Loki
         {
         }
 
-        public void ExecuteWithinLock(Action action, int expiryFromSeconds)
+        public void ExecuteWithinLock(Action action, int expiryFromSeconds, string uniqueKey = null)
         {
-            bool isLocked = LokiLockManager.Lock(expiryFromSeconds);
+            bool isLocked = LokiLockManager.Lock(expiryFromSeconds, uniqueKey);
 
             if (isLocked)
             {
                 action.Invoke();
-                LokiLockManager.Release();
+                LokiLockManager.Release(uniqueKey);
             }
         }
     }
