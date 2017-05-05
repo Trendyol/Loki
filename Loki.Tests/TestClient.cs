@@ -21,5 +21,22 @@ namespace Loki.Tests
                 }
             }, expiryFromSeconds: 5);
         }
+
+        public void DebugWriteLineWithUniqueKey()
+        {
+            Locking.Instance.ExecuteWithinLock(() =>
+            {
+                var item = Source.DummyItems.FirstOrDefault(queryable => queryable.IsProcessed == false);
+
+                if (item != null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Id: {item.Id} Is Processed: {item.IsProcessed} Thread {Thread.CurrentThread.ManagedThreadId}");
+
+                    item.IsProcessed = true;
+
+                    Source.ProcessedItems.Add(item);
+                }
+            }, expiryFromSeconds: 5, uniqueKey: "5");
+        }
     }
 }
