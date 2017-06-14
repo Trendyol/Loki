@@ -25,13 +25,13 @@ namespace Loki.Redis
 
         public bool Set(string key, string value, int expiryFromSeconds)
         {
-            bool result = _database.StringSet(key, value, TimeSpan.FromSeconds(expiryFromSeconds));
+            bool result = _database.LockTake(key, value, TimeSpan.FromSeconds(expiryFromSeconds));
             return result;
         }
 
-        public void Delete(string key)
+        public void Delete(string key, string value)
         {
-            _database.KeyDelete(key);
+            _database.LockRelease(key, value);
         }
     }
 }
