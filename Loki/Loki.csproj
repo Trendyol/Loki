@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logging\Liblog.cs" />
     <Compile Include="LokiConfiguration.cs" />
     <Compile Include="LokiConfigurationBuilder.cs" />
     <Compile Include="LokiLockHandler.cs" />

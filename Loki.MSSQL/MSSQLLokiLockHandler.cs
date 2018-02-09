@@ -2,11 +2,13 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Loki.MSSQL.Logging;
 
 namespace Loki.MSSQL
 {
     public class MSSQLLokiLockHandler : LokiLockHandler
     {
+        private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
         private readonly string _connectionString;
 
         public MSSQLLokiLockHandler(string connectionString)
@@ -29,9 +31,10 @@ namespace Loki.MSSQL
 
                     if (creationDate.AddSeconds(expiryFromSeconds) < DateTime.Now)
                     {
+                        // TODO: Concurrent workerlarda sıkıntı yaratır. Düzeltmek lazım.
                         string updateQuery = "UPDATE LokiLockings SET CreationDate=@CreationDate WHERE ServiceKey=@ServiceKey";
 
-                        int isUpdated = Task.Run(async () => await MSSQLHelper.ExecuteNonQueryAsync(_connectionString, CommandType.Text, updateQuery, new SqlParameter("ServiceKey", serviceKey))).Result;
+                        int isUpdated = Task.Run(async () => await MSSQLHelper.ExecuteNonQueryAsync(_connectionString, CommandType.Text, updateQuery, new SqlParameter("CreationDate", DateTime.Now), new SqlParameter("ServiceKey", serviceKey))).Result;
 
                         if (isUpdated > 0)
                         {
@@ -53,6 +56,7 @@ namespace Loki.MSSQL
             }
             catch (Exception ex)
             {
+                Logger.ErrorException($"There was an error while acquiring lock for service:{serviceKey}.", ex);
                 isLocked = false;
             }
 

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logging\Liblog.cs" />
     <Compile Include="MSSQLHelper.cs" />
     <Compile Include="MSSQLLokiLockHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
