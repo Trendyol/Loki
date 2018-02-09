@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>LokiNet.MSSQL</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <title>LokiNet.MSSQL</title>
     <authors>Gökhan Gökalp, Ömer Cinbat</authors>
     <owners>Gökhan Gökalp, trendyol</owners>
@@ -11,7 +11,7 @@
     <summary>Loki provides an easy way to handle locking scenarios on distributed systems.</summary>
     <tags>Distributed lock</tags>
     <dependencies>
-      <dependency id="StackExchange.Redis" version="1.2.0" />
+      <dependency id="LokiNet" version="1.1.0" />
     </dependencies>
   </metadata>
 </package>
