@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>LokiNet</id>
+    <id>LokiNet.MSSQL</id>
     <version>1.1.0</version>
-    <title>LokiNet</title>
+    <title>LokiNet.MSSQL</title>
     <authors>Gökhan Gökalp, Ömer Cinbat</authors>
     <owners>Gökhan Gökalp, trendyol</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
