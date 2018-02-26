@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.nuget/packages/mstest.testadapter/1.2.0/build/_common/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/mstest.testadapter/1.2.0/build/_common/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/mstest.testadapter/1.2.0/build/_common/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" t="Include" />
+    <e p="$USER_HOME$/Library/Caches/Rider2017.3/resharper-host/local/Transient/ReSharperHost/v11/SolutionCaches/_Loki.-804354094.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p=".gitattributes" t="Include" />
+      <e p=".gitignore" t="Include" />
+      <e p="appveyor.yml" t="Include" />
+      <e p="Loki" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Locking.cs" t="Include" />
+        <e p="Logging" t="Include">
+          <e p="Liblog.cs" t="Include" />
+        </e>
+        <e p="Loki.csproj" t="IncludeRecursive" />
+        <e p="Loki.nuspec" t="Include" />
+        <e p="LokiConfiguration.cs" t="Include" />
+        <e p="LokiConfigurationBuilder.cs" t="Include" />
+        <e p="LokiLockHandler.cs" t="Include" />
+        <e p="LokiLockManager.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Loki.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="packages.config" t="Include" />
+        <e p="Redis" t="Include">
+          <e p="IRedisStore.cs" t="Include" />
+          <e p="RedisConnectionFactory.cs" t="Include" />
+          <e p="RedisLokiLockHandler.cs" t="Include" />
+          <e p="RedisStore.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Loki.MSSQL" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Logging" t="Include">
+          <e p="Liblog.cs" t="Include" />
+        </e>
+        <e p="Loki.MSSQL.csproj" t="IncludeRecursive" />
+        <e p="Loki.MSSQL.nuspec" t="Include" />
+        <e p="MSSQLHelper.cs" t="Include" />
+        <e p="MSSQLLokiLockHandler.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Loki.MSSQL.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Loki.sln" t="IncludeFlat" />
+      <e p="Loki.Tests" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="appconfig.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Loki.Tests.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net461" t="Include">
+              <e p="Loki.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+            <e p="netstandard2.0" t="Include">
+              <e p="Loki.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="packages.config" t="Include" />
+        <e p="SimpleTest.cs" t="Include" />
+        <e p="Source.cs" t="Include" />
+        <e p="TestClient.cs" t="Include" />
+      </e>
+      <e p="misc" t="Include">
+        <e p="logo.png" t="Include" />
+        <e p="loki-basic-workflow.png" t="Include" />
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="README.md" t="Include" />
+      <e p="Solution Items" t="Include" />
+    </e>
+  </component>
+</project>

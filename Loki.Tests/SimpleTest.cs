@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using AutoFixture;
 using Loki.MSSQL;
 using Loki.Redis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ploeh.AutoFixture;
+#if NET461
+using System.Configuration;
+#endif
+#if NETSTANDARD2_0
+using Microsoft.Extensions.Configuration;
+
+#endif
 
 namespace Loki.Tests
 {
@@ -32,12 +38,23 @@ namespace Loki.Tests
                 new DnsEndPoint("your redis endpoint", 6379)
             };
 
-            string connectionString = ConfigurationManager.ConnectionStrings["TestDb"].ConnectionString;
+            string connectionString = "";
+
+#if NET461
+            connectionString = ConfigurationManager.ConnectionStrings["TestDb"].ConnectionString;
+#endif
+
+#if NETSTANDARD2_0
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appconfig.json")
+                .Build();
+            connectionString = config["TestDb"];
+#endif
 
             LokiConfigurationBuilder.Instance.SetServiceKey("SimpleTestClient")
-                                    .SetPrimaryLockHandler(new RedisLokiLockHandler(redisEndPoints.ToArray()))
-                                    .SetSecondaryLockHandler(new MSSQLLokiLockHandler(connectionString))
-                                    .Build();
+                .SetPrimaryLockHandler(new RedisLokiLockHandler(redisEndPoints.ToArray()))
+                .SetSecondaryLockHandler(new MSSQLLokiLockHandler(connectionString))
+                .Build();
         }
 
         [TestMethod]
@@ -64,7 +81,6 @@ namespace Loki.Tests
             };
 
 
-
             //Act
             clientTasks.ForEach(x => x.Start());
 
@@ -72,9 +88,9 @@ namespace Loki.Tests
 
             //Assert
             var dublicateItems = Source.ProcessedItems
-                                .GroupBy(i => i)
-                                .Where(g => g.Count() > 1)
-                                .Select(g => g.Key).ToList();
+                .GroupBy(i => i)
+                .Where(g => g.Count() > 1)
+                .Select(g => g.Key).ToList();
 
             Assert.AreEqual(0, dublicateItems.Count);
         }
