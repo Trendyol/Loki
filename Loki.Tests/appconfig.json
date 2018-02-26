@@ -1,0 +1,3 @@
+﻿{
+  "TestDb": "Server=.;Database=TestDb;Integrated Security=true;"
+}
